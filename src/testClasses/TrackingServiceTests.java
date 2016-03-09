@@ -1,5 +1,12 @@
+package testClasses;
+
 import org.junit.*;
+
+import classes.TrackingService;
+import exceptions.InvalidGoalException;
+
 import static org.junit.Assert.*;
+
 
 
 public class TrackingServiceTests {
