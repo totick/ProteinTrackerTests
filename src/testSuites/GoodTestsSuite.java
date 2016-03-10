@@ -10,7 +10,7 @@ import testClasses.HelloJUnitTest;
 import testClasses.TrackingServiceTests;
 
 @RunWith(Categories.class)
-@IncludeCategory(GoodTestsCategory.class) //Filters the methods which implements the GoodTEstsCategory interface
+@IncludeCategory(GoodTestsCategory.class) //Filters the methods which implements the GoodTestsCategory interface
 @Suite.SuiteClasses({
 	HelloJUnitTest.class,
 	TrackingServiceTests.class
