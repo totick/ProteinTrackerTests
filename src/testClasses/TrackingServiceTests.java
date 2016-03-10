@@ -1,14 +1,20 @@
 package testClasses;
 
-import static org.junit.Assert.assertEquals;
+//For advanced Assertions
+import static org.hamcrest.CoreMatchers.allOf;
+import static org.hamcrest.CoreMatchers.instanceOf;
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
 
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
+import org.junit.rules.ExpectedException;
 
 import classes.TrackingService;
 import exceptions.InvalidGoalException;
@@ -56,6 +62,8 @@ public class TrackingServiceTests {
 	public void whenAddingProteinTotalIncreasesByThatAmount(){
 		service.addProtein(10);
 		assertEquals("Protein amount was not correct", 10, service.getTotal());
+		assertThat(service.getTotal(), is(10)); //Same as above but easier to read.
+		assertThat(service.getTotal(), allOf(is(10), instanceOf(Integer.class))); //Tests multiple conditions.
 	}
 	
 	@Test
@@ -68,6 +76,19 @@ public class TrackingServiceTests {
 	//The test method expects that an exception is going be thrown
 	@Test(expected = InvalidGoalException.class)
 	public void whenGoalIsSetToLessThanZeroExceptionIsThrown() throws InvalidGoalException{
+		service.setGoal(-5);
+	}
+	
+	@Rule
+	public ExpectedException thrown = ExpectedException.none();
+	
+	//Test method that checks if and specific exception is thrown and that the expected message matches.
+	//Uses the rule above
+	@Test
+	public void whenGoalIsSetToLessThanZeroExceptionIsThrownWithRule() throws InvalidGoalException{
+		thrown.expect(InvalidGoalException.class);
+		thrown.expectMessage(containsString("Goal"));
+		//thrown.expectMessage("Goal was less than zero"); //Exact string match
 		service.setGoal(-5);
 	}
 	
