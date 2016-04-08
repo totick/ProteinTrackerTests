@@ -46,4 +46,10 @@ public class ParameterizedTests {
 		
 		assertEquals(expected, service.getTotal());
 	}
+	
+	@Test
+	public void test2(){
+		System.out.println(input + " " + expected);
+		assertEquals(1, 1);
+	}
 }
